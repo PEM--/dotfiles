@@ -1,0 +1,19 @@
+[user]
+	name = PEM--
+	email = pemarchandet@gmail.com
+[alias]
+	co = checkout
+	br = branch
+	st = status
+[apply]
+	whitespace = nowarn
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[web]
+	browser = chromium-browser
+[core]
+	excludefile = /home/pem/.gitignore_global
+[push]
+	default = simple
