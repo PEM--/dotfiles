@@ -43,16 +43,16 @@ set foldlevelstart=0
 "nnoremap <Enter> za
 "vnoremap <Enter> za
 function! MyFoldText()
-	let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
   let nucolwidth = &fdc + &number * &numberwidth
   let windowwidth = winwidth(0) - nucolwidth - 3
   let foldedlinecount = v:foldend - v:foldstart
-	" expand tabs into spaces
-	let onetab = strpart('          ', 0, &tabstop)
-	let line = substitute(line, '\t', onetab, 'g')
-	let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-	let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-	return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction
 set foldtext=MyFoldText()
 " Backup___________________________________________________
@@ -65,7 +65,7 @@ call vundle#rc()
 " Vim AirLine (lightwieght powerline)
 Bundle 'bling/vim-airline'
 let g:airline_powerline_fonts=1
-" Augment plugins language capabilities 
+" Augment plugins language capabilities
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tlib'
@@ -126,6 +126,8 @@ Bundle 'claco/jasmine.vim'
 Bundle 'tpope/vim-cucumber'
 " Brunch : Fast Backbone & Coffeescript dev framewwork
 Bundle 'drichard/vim-brunch'
+" Grunt
+Bundle 'mklabs/grunt.vim'
 " CtrlP Fast fuzzy search. Use it with <C-p>
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_use_caching = 1
@@ -133,7 +135,7 @@ let g:ctrlp_cache_dir = '~/tmp/cache/ctrlp'
 set wildignore+=node_modules,bower_components,tmp,build,dist
 " Add closing parenthesis, bracket, quotes
 Bundle 'Raimondi/delimitMate'
-au FileType mail let b:delimitMate_autoclose=0 
+au FileType mail let b:delimitMate_autoclose=0
 " Add closing tag support for HTML and XML
 Bundle 'closetag.vim'
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
@@ -162,6 +164,7 @@ nmap <F3> :NERDTreeToggle<CR>
 let NERDTreeWinSize=25
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
+let NERDTreeShowHidden=1
 " MBE - MiniBufferEXplorer
 "Bundle 'fholgado/minibufexpl.vim'
 "map <F5> :TMiniBufExplorer<CR>
@@ -182,7 +185,7 @@ Bundle 'endel/flashdevelop.vim'
 " Align selected text in visual mode on a parttern. Example with a =: :Tab /=
 Bundle 'godlygeek/tabular'
 " Git plugins : syntax and commands: Gbrowse, Gstatus, Gcommit, ...
-Bundle 'tpope/vim-git' 
+Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-fugitive'
 " Powerline: Status line
 " Bundle 'Lokaltog/powerline'
@@ -232,13 +235,14 @@ let g:tagbar_autoshowtag=1
 let g:tagbar_compact=1
 map <F4> :TagbarToggle<CR>
 map <F8> :let x = system('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q . >/dev/null 2>&1')<CR>
-" Better JS support via DoctorJS
-" git clone --recursive https://github.com/mozilla/doctorjs.git
+" Better tags definition: brew install ctags-exuberant
+set tags=./tags,tags;/
+" Better JS support via DoctorJS: npm install -g jsctags
 let g:tagbar_type_javascript = {
-	\ 'ctagsbin' : '/usr/local/bin/jsctags'
-	\ }
-" Coffescript support: gem install CoffeeTags
-let g:tlist_coffee_settings = 'coffee;f:function;v:variable'
+  \ 'ctagsbin' : '/usr/local/bin/jsctags'
+  \ }
+
+" CoffeeScript : gem install coffeetags
 if executable('coffeetags')
   let g:tagbar_type_coffee = {
         \ 'ctagsbin' : 'coffeetags',
@@ -254,15 +258,70 @@ if executable('coffeetags')
         \ }
         \ }
 endif
+" Posix regular expressions for matching interesting items. Since this will 
+" be passed as an environment variable, no whitespace can exist in the options
+" so [:space:] is used instead of normal whitespaces.
+" Adapted from: https://gist.github.com/2901844
+"let s:ctags_opts = '
+  "\ --langdef=coffee
+  "\ --langmap=coffee:.coffee
+  "\ --regex-coffee=/(^|=[ \t])*class ([A-Za-z_][A-Za-z0-9_]+\.)*([A-Za-z_][A-Za-z0-9_]+)( extends ([A-Za-z][A-Za-z0-9_.]*)+)?$/\3/c,class/
+  "\ --regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?(([A-Za-z][A-Za-z0-9_.]*)+):.*[-=]>.*$/\3/m,method/
+  "\ --regex-coffee=/^[ \t]*(module\.)?(exports\.)?(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=.*[-=]>.*$/\3/f,function/
+  "\ --regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/v,variable/
+  "\ --regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/f,field/
+  "\ --regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,static field/
+  "\ --regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?/\3/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){0}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){1}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){2}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){3}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){4}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){5}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){6}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){7}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){8}/\8/f,field/
+  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){9}/\8/f,field/'
+"let $CTAGS = substitute(s:ctags_opts, '\v\\([nst]\)', '\\\\\1', 'g')
+" Markdown support
+let g:tagbar_type_markdown = {
+  \ 'ctagstype' : 'markdown',
+  \ 'kinds' : [
+    \ 'h:Heading_L1',
+    \ 'i:Heading_L2',
+    \ 'k:Heading_L3'
+  \ ]
+\ }
+" Ruby
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+" CSS
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
 " Syntax error checking
 Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_enable_highlighting = 1
 let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠' 
-let g:syntastic_style_error_symbol='⚠' 
-let g:syntastic_style_warning_symbol='⚠' 
-let g:syntastic_javascript_checkers=["jshint --config=~/.coffeelint.json"]
-let g:syntastic_coffee_coffeelint="-f ~/.coffeelint.json"
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='⚠'
+let g:syntastic_style_warning_symbol='⚠'
 " Set plugin to work depending on filetype
 filetype plugin indent on " Automatic indentation
 filetype plugin on " Add automatic plugins depending on filetype
@@ -318,14 +377,14 @@ map <C-e> <Esc>:Exp<CR>
 " Preserve indentation while pasting text from system clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 " Yanking (pasting) goes on clipboard
-set clipboard+=unnamed 
+set clipboard+=unnamed
 " Wrap_____________________________________________________
-" Set wrap to 150 column
-set colorcolumn=150
+" Set wrap to 80 column
+set colorcolumn=80
 " Highlight text when transgressing the column's limit
 "augroup vimrc_autocmds
-	"autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
-	"autocmd BufEnter * match OverLength /\%150v.*/
+  "autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
+  "autocmd BufEnter * match OverLength /\%150v.*/
 "augroup END
 " Avoid wrapping
 set nowrap
@@ -376,3 +435,6 @@ let g:quickrun_config = {
 \     'outputter': 'browser'
 \   }
 \ }
+" Dash integration
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'

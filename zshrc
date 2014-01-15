@@ -52,15 +52,6 @@ export EDITOR=vim
 # Create a simple HTTP server on port 8000 in the current dir
 alias simpleserver='python -m SimpleHTTPServer'
 
-# Create a server for DevDocs
-devdocs() {
-  cd ~/BuildImport/devdocs
-  rackup &
-  sleep 3
-  open http://localhost:9292
-  cd -
-}
-
 # Update eveything (except Mac App Store)
 update_all() {
   sudo gem update
@@ -80,7 +71,7 @@ export CHROME_BIN='/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Goog
 
 # Some environmental variables mainly for Android's SDK
 export ANDROID_HOME=/usr/local/opt/android-sdk
-export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export JAVA_HOME=/Library/Java/Home
 
 # Some environmental variables for NodeJS
