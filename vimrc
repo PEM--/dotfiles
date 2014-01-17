@@ -65,6 +65,17 @@ call vundle#rc()
 " Vim AirLine (lightwieght powerline)
 Bundle 'bling/vim-airline'
 let g:airline_powerline_fonts=1
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+  autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
+set laststatus=2
+set noshowmode
 " Augment plugins language capabilities
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -75,8 +86,6 @@ Bundle 'altercation/vim-colors-solarized'
 "set background=light
 set background=dark
 colo solarized
-"let g:solarized_contrast='high'
-"let g:solarized_visibility='high'
 " See tab indendation
 Bundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_start_level=2
@@ -93,11 +102,9 @@ let g:rooter_use_lcd=1
 Bundle 'gmarik/vundle'
 " Press '<leader>ce'(':ColorVEdit') in 'LightSlateGray'
 Bundle 'Rykka/colorv.vim'
+let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
 " Automatic 'end' on Ruby, 'fi/endif' on bash or vi, ...
 Bundle 'tpope/vim-endwise'
-" Better keyword completion
-"Bundle 'Shougo/neocomplcache'
-"let g:neocomplcache_enable_at_startup=1
 " NodeJS dictionnary
 Bundle 'guileen/vim-node'
 au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
@@ -114,7 +121,6 @@ au BufWritePost *.coffee silent make
 let coffee_lint_options='-f ~/.coffeelint.json'
 let coffee_linter='/usr/local/bin/coffeelint'
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 Bundle 'mintplant/vim-literate-coffeescript'
 " Better JSON syntax highlighting
 Bundle 'elzr/vim-json'
@@ -140,13 +146,6 @@ au FileType mail let b:delimitMate_autoclose=0
 Bundle 'closetag.vim'
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,xsd,wsdl,htmldjango,jinjahtml,eruby,mako,byt source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
-" Completion with <Tab>
-"Bundle 'ervandew/supertab'
-"let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-"let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-"let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-" Better terminal support of colors
-" Bundle 'godlygeek/csapprox'
 " Change surrounding: 'test' -> <p>test</p> : cs'<p>
 Bundle 'tpope/vim-surround'
 " Show marks for fast code jumps
@@ -180,35 +179,20 @@ Bundle 'rking/ag.vim'
 map <C-F> :Ag! 
 " Syntax for AS files
 Bundle 'endel/flashdevelop.vim'
-" Syntax for NGinx configuration files
-"Bundle 'andersjanmyr/nginx-vim-syntax'
 " Align selected text in visual mode on a parttern. Example with a =: :Tab /=
 Bundle 'godlygeek/tabular'
 " Git plugins : syntax and commands: Gbrowse, Gstatus, Gcommit, ...
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-fugitive'
-" Powerline: Status line
-" Bundle 'Lokaltog/powerline'
-" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
-if ! has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-  autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-  augroup END
-endif
-set laststatus=2
-set noshowmode
 " Support for C/C++ block highlighting in {}
 Bundle 'BlockHL'
 " Syntax for MarkDown files
 Bundle 'tpope/vim-markdown'
 " Syntax for JADE files
 Bundle 'digitaltoad/vim-jade'
+" Syntax for Haml, Sass, SCSS
+Bundle 'tpope/vim-haml'
 " Syntax for CSS3 files
-Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 " Syntax for LESS files
 Bundle 'groenewege/vim-less'
@@ -221,10 +205,11 @@ Bundle 'othree/html5.vim'
 Bundle 'mattn/emmet-vim'
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " Snippets
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Bundle 'SirVer/ultisnips'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
 Bundle 'Jasmine-snippets-for-snipMate'
 Bundle 'carlosvillu/coffeScript-VIM-Snippets'
 " Analyse CTags and present them in a window
@@ -241,7 +226,6 @@ set tags=./tags,tags;/
 let g:tagbar_type_javascript = {
   \ 'ctagsbin' : '/usr/local/bin/jsctags'
   \ }
-
 " CoffeeScript : gem install coffeetags
 if executable('coffeetags')
   let g:tagbar_type_coffee = {
@@ -258,32 +242,6 @@ if executable('coffeetags')
         \ }
         \ }
 endif
-" Posix regular expressions for matching interesting items. Since this will 
-" be passed as an environment variable, no whitespace can exist in the options
-" so [:space:] is used instead of normal whitespaces.
-" Adapted from: https://gist.github.com/2901844
-"let s:ctags_opts = '
-  "\ --langdef=coffee
-  "\ --langmap=coffee:.coffee
-  "\ --regex-coffee=/(^|=[ \t])*class ([A-Za-z_][A-Za-z0-9_]+\.)*([A-Za-z_][A-Za-z0-9_]+)( extends ([A-Za-z][A-Za-z0-9_.]*)+)?$/\3/c,class/
-  "\ --regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?(([A-Za-z][A-Za-z0-9_.]*)+):.*[-=]>.*$/\3/m,method/
-  "\ --regex-coffee=/^[ \t]*(module\.)?(exports\.)?(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=.*[-=]>.*$/\3/f,function/
-  "\ --regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/v,variable/
-  "\ --regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/f,field/
-  "\ --regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,static field/
-  "\ --regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?/\3/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){0}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){1}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){2}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){3}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){4}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){5}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){6}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){7}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){8}/\8/f,field/
-  "\ --regex-coffee=/((constructor|initialize):[ \t]*\()@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?(,[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)([ \t]*=[ \t]*[^,)]+)?){9}/\8/f,field/'
-"let $CTAGS = substitute(s:ctags_opts, '\v\\([nst]\)', '\\\\\1', 'g')
 " Markdown support
 let g:tagbar_type_markdown = {
   \ 'ctagstype' : 'markdown',
@@ -361,19 +319,19 @@ let g:used_javascript_libs='jquery,angularjs'
 "Bundle 'Rip-Rip/clang_complete'
 "let g:clang_library_path='/usr/lib/'
 "let g:clang_use_library=1
-" Vim-Clang_______________________________________________
-"Bundle 'vim-clang'
 " You Complete Me_________________________________________
 Bundle 'Valloric/YouCompleteMe'
+" Completion for JS
+Bundle 'marijnh/tern_for_vim'
 " Vertical splitter________________________________________
 hi VertSplit guibg=black guifg=darkgrey
 set fillchars=vert:\│
 "File navigation
 map <C-e> <Esc>:Exp<CR>
 " Copy and paste___________________________________________
-"System copy and paste
-"noremap <leader>y "*y
-"noremap <leader>yy "*Y
+" System copy and paste
+noremap <leader>y "*y
+noremap <leader>yy "*Y
 " Preserve indentation while pasting text from system clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 " Yanking (pasting) goes on clipboard
