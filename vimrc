@@ -141,11 +141,14 @@ let g:ctrlp_cache_dir = '~/tmp/cache/ctrlp'
 set wildignore+=node_modules,bower_components,tmp,build,dist
 " Add closing parenthesis, bracket, quotes
 Bundle 'Raimondi/delimitMate'
-au FileType mail let b:delimitMate_autoclose=0
+let delimitMate_matchpairs = "(:),[:],{:},<:>"
+au FileType vim,html,svg,xml let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+let delimitMate_quotes = "\" ' ` *"" '
+au FileType html,js,coffee let b:delimitMate_quotes = "\" '"
 " Add closing tag support for HTML and XML
 Bundle 'closetag.vim'
-autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,xsd,wsdl,htmldjango,jinjahtml,eruby,mako,byt source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako,svg let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,xsd,wsdl,htmldjango,jinjahtml,eruby,mako,byt,svg source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 " Change surrounding: 'test' -> <p>test</p> : cs'<p>
 Bundle 'tpope/vim-surround'
 " Show marks for fast code jumps
@@ -200,12 +203,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'wavded/vim-stylus'
 " Syntax for HTML5 files
 Bundle 'othree/html5.vim'
-" Emmet (simplify HTML and CSS writings like snipmate on steroids), works also
-" in Chrome Dev Tools
-Bundle 'mattn/emmet-vim'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " Snippets
-Bundle 'SirVer/ultisnips'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
@@ -222,26 +220,22 @@ map <F4> :TagbarToggle<CR>
 map <F8> :let x = system('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q . >/dev/null 2>&1')<CR>
 " Better tags definition: brew install ctags-exuberant
 set tags=./tags,tags;/
-" Better JS support via DoctorJS: npm install -g jsctags
-let g:tagbar_type_javascript = {
-  \ 'ctagsbin' : '/usr/local/bin/jsctags'
-  \ }
 " CoffeeScript : gem install coffeetags
-if executable('coffeetags')
-  let g:tagbar_type_coffee = {
-        \ 'ctagsbin' : 'coffeetags',
-        \ 'ctagsargs' : '--include-vars',
-        \ 'kinds' : [
-        \ 'f:functions',
-        \ 'o:object',
-        \ ],
-        \ 'sro' : ".",
-        \ 'kind2scope' : {
-        \ 'f' : 'object',
-        \ 'o' : 'object',
-        \ }
-        \ }
-endif
+"if executable('coffeetags')
+  "let g:tagbar_type_coffee = {
+        "\ 'ctagsbin' : 'coffeetags',
+        "\ 'ctagsargs' : '--include-vars',
+        "\ 'kinds' : [
+        "\ 'f:functions',
+        "\ 'o:object',
+        "\ ],
+        "\ 'sro' : ".",
+        "\ 'kind2scope' : {
+        "\ 'f' : 'object',
+        "\ 'o' : 'object',
+        "\ }
+        "\ }
+"endif
 " Markdown support
 let g:tagbar_type_markdown = {
   \ 'ctagstype' : 'markdown',
@@ -303,13 +297,13 @@ set ofu=syntaxcomplete#Complete
 "let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 let g:SuperTabDefaultCompletionType='<Tab>'
 let g:SuperTabDefaultCompletionType="context"
-hi Pmenu    guibg=black
-hi PMenuSel guibg=yellow guifg=black gui=bold
 set completeopt=longest,menuone,preview
 set wildmenu
 set wildmode=full
 "Add syntax highlighting for filetypes
 au BufNewFile,BufRead *.wsdl,*.xsd set filetype=xml
+" SuperTab_______________________________________________
+Bundle 'ervandew/supertab'
 " SyntaxComplete_________________________________________
 Bundle 'vim-scripts/SyntaxComplete'
 " JavaScript libraries completion
@@ -317,12 +311,14 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs='jquery,angularjs'
 " Clang Complete__________________________________________
 "Bundle 'Rip-Rip/clang_complete'
-"let g:clang_library_path='/usr/lib/'
 "let g:clang_use_library=1
 " You Complete Me_________________________________________
-Bundle 'Valloric/YouCompleteMe'
-" Completion for JS
-Bundle 'marijnh/tern_for_vim'
+"Bundle 'Valloric/YouCompleteMe'
+" Vim marching (completion based on clang)
+Bundle 'Shougo/vimproc'
+Bundle 'osyo-manga/vim-reunions'
+Bundle 'osyo-manga/vim-marching'
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
 " Vertical splitter________________________________________
 hi VertSplit guibg=black guifg=darkgrey
 set fillchars=vert:\│
@@ -359,23 +355,16 @@ Bundle 'benmills/vimux'
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#popup_on_dot = 0
 "let g:jedi#autocompletion_command = "<Tab>"
-" Python-mode
-"Bundle 'klen/python-mode'
 " Vim-Pasta : Meilleur paste
 Bundle 'sickill/vim-pasta'
 " Quickfixsigns : Ajout de marqueur lors de bookmarks de lignes
 Bundle 'tomtom/quickfixsigns_vim'
-" Autoclose
-Bundle 'Townk/vim-autoclose'
 " Unimpaired
 Bundle 'tpope/vim-unimpaired'
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
-" Xiki
-" let $XIKI_DIR='/var/lib/gems/1.9.1/gems/xiki-0.6.5'
-" source /var/lib/gems/1.9.1/gems/xiki-0.6.5/etc/vim/xiki.vim
 " Neo4j and Cypher_________________________________________
 Bundle "neo4j-contrib/cypher-vim-syntax"
 " Lorem ipsum______________________________________________
