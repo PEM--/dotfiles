@@ -16,7 +16,7 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # Set best compilation and linking support by default
-#export CFLAGS="-march=native -O3 -pipe" 
+#export CFLAGS="-march=native -O3 -pipe"
 #export LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed" 
 #export CXXFLAGS="${CFLAGS}"
 
@@ -42,6 +42,9 @@ alias lll='ls -Glh | less'
 alias l='ls'
 alias la='ls -a'
 alias top='htop'
+alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
 # Replace system's vim with macvim (brew install macvim)
 alias vim='mvim -v'
@@ -55,9 +58,9 @@ alias simpleserver='python -m SimpleHTTPServer'
 # Update eveything (except Mac App Store)
 update_all() {
   sudo gem update
-  npm -g update
   brew update
   brew upgrade
+  npm -g update
   upgrade_oh_my_zsh
   vundle-update
 }
@@ -78,4 +81,4 @@ export JAVA_HOME=/Library/Java/Home
 export NODE_PATH=/usr/local/lib/node_modules
 
 # Set priority on imported binaries rather than system's ones
-export PATH=/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin

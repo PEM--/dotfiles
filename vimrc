@@ -24,6 +24,8 @@ let mapleader=","
 set history=200
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+"Add syntax highlighting for filetypes
+au BufNewFile,BufRead *.wsdl,*.xsd set filetype=xml
 " Search___________________________________________________
 " Case management when searching (replacing)
 set ignorecase smartcase
@@ -300,10 +302,36 @@ let g:SuperTabDefaultCompletionType="context"
 set completeopt=longest,menuone,preview
 set wildmenu
 set wildmode=full
-"Add syntax highlighting for filetypes
-au BufNewFile,BufRead *.wsdl,*.xsd set filetype=xml
-" SuperTab_______________________________________________
-Bundle 'ervandew/supertab'
+"NeoComplete_______________________________________________
+Bundle 'Shougo/vimshell.vim'
+Bundle 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+endfunction
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns={}
+endif
 " SyntaxComplete_________________________________________
 Bundle 'vim-scripts/SyntaxComplete'
 " JavaScript libraries completion
