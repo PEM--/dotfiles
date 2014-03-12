@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="miloshadzic"
+# ZSH_THEME="miloshadzic"
 ZSH_THEME="sorin"
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -17,8 +17,10 @@ HISTFILE=~/.zsh_history
 
 # Set best compilation and linking support by default
 #export CFLAGS="-march=native -O3 -pipe"
-#export LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed" 
+#export LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed"
 #export CXXFLAGS="${CFLAGS}"
+export CPPFLAGS="-I/usr/local/opt/qt5/include"
+export LDFLAGS="-L/usr/local/opt/qt5/lib"
 
 # Fixing CTRL-Arrow left and right
 bindkey ';5D' emacs-backward-word
@@ -45,25 +47,32 @@ alias top='htop'
 alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-
+# Create a simple HTTP server on port 8000 in the current dir
+alias simpleserver='python -m SimpleHTTPServer'
 # Replace system's vim with macvim (brew install macvim)
 alias vim='mvim -v'
 
-# Set default editor
-export EDITOR=vim
-
-# Create a simple HTTP server on port 8000 in the current dir
-alias simpleserver='python -m SimpleHTTPServer'
-
 # Update eveything (except Mac App Store)
 update_all() {
-  sudo gem update
+  sudo gem update --system
   brew update
   brew upgrade
+  brew cask update
   npm -g update
   upgrade_oh_my_zsh
   vundle-update
 }
+
+# Clean all caches
+clean_all() {
+  sudo gem clean
+  brew cleanup
+  brew cask cleanup
+  npm cache clean
+}
+
+# Set default editor
+export EDITOR=vim
 
 # Optimize Make
 export JOBS=2

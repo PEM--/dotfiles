@@ -26,6 +26,7 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 "Add syntax highlighting for filetypes
 au BufNewFile,BufRead *.wsdl,*.xsd set filetype=xml
+au BufReadPost *.cnf set filetype=dosini
 " Search___________________________________________________
 " Case management when searching (replacing)
 set ignorecase smartcase
@@ -64,7 +65,17 @@ set directory=/tmp// " prepend(^=) $HOME/.tmp/ to default path; use full path as
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" Vim AirLine (lightwieght powerline)
+" Themes
+Bundle 'tomasr/molokai'
+let g:rehash256 = 1
+set background=light
+colo molokai
+" Bundle 'altercation/vim-colors-solarized'
+"set t_Co=256
+"set background=light
+"set background=dark
+" colo solarized
+" Vim AirLine (lightweight powerline)
 Bundle 'bling/vim-airline'
 let g:airline_powerline_fonts=1
 set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
@@ -82,12 +93,6 @@ set noshowmode
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tlib'
-" Themes
-Bundle 'altercation/vim-colors-solarized'
-"set t_Co=256
-"set background=light
-set background=dark
-colo solarized
 " See tab indendation
 Bundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_start_level=2
@@ -195,6 +200,9 @@ Bundle 'BlockHL'
 Bundle 'tpope/vim-markdown'
 " Syntax for JADE files
 Bundle 'digitaltoad/vim-jade'
+" Syntax for Mustache
+Bundle 'mustache/vim-mustache-handlebars'
+let g:mustache_abbreviations=1
 " Syntax for Haml, Sass, SCSS
 Bundle 'tpope/vim-haml'
 " Syntax for CSS3 files
@@ -267,7 +275,7 @@ let g:tagbar_type_css = {
         \ 'i:identities'
     \ ]
 \ }
-" Syntax error checking
+" Syntax error checking____________________________________
 Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 1
@@ -329,8 +337,34 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#cancel_popup()
+autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown,jade setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript,coffeescript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns={}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" Neo Snippets___________________________________________
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
+" Plugin key-mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
 endif
 " SyntaxComplete_________________________________________
 Bundle 'vim-scripts/SyntaxComplete'
@@ -349,7 +383,7 @@ Bundle 'osyo-manga/vim-marching'
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
 " Vertical splitter________________________________________
 hi VertSplit guibg=black guifg=darkgrey
-set fillchars=vert:\│
+set fillchars=vert:\ 
 "File navigation
 map <C-e> <Esc>:Exp<CR>
 " Copy and paste___________________________________________
@@ -413,3 +447,11 @@ let g:quickrun_config = {
 " Dash integration
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
+" PHP______________________________________________________
+Bundle 'StanAngeloff/php.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'm2mdas/phpcomplete-extended'
+Bundle 'violetyk/neocomplete-php.vim'
+" VDebug (PHP, Ruby, Python, NodeJS)_______________________
+Bundle 'joonty/vdebug.git'
