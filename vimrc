@@ -110,8 +110,14 @@ Bundle 'gmarik/vundle'
 " Press '<leader>ce'(':ColorVEdit') in 'LightSlateGray'
 Bundle 'Rykka/colorv.vim'
 let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
+" Ruby_____________________________________________________
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+" Vagrant
+Bundle 'vim-vagrant'
 " Automatic 'end' on Ruby, 'fi/endif' on bash or vi, ...
 Bundle 'tpope/vim-endwise'
+" JavaScript_______________________________________________
 " NodeJS dictionnary
 Bundle 'guileen/vim-node'
 au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
@@ -120,7 +126,7 @@ Bundle "pangloss/vim-javascript"
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
-" CoffeScript provides CoffeeMake
+" CoffeScript (provides CoffeeMake)________________________
 Bundle 'kchmck/vim-coffee-script'
 let coffee_make_options = '--bare -o ~/tmp' " compile without top-level function: usefull for syntax checks
 let coffee_compiler = '/usr/local/bin/coffee' " useful for changing compiler to IcedCoffee

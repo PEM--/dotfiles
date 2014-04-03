@@ -33,7 +33,7 @@ bindkey ';5C' emacs-forward-word
 alias cat='~/dotfiles/utils/codecat.sh'
 
 # Oh-my-zsh plugins
-plugins=(git bower brew cake coffee colored-man colorize cp dircycle extract gem git history node npm osx pass pip python redis-cli terminalapp themes urltools vundle web-search)
+plugins=(git bower brew cake coffee colored-man colorize cp dircycle extract gem git history node npm osx pass pip python redis-cli terminalapp themes urltools vundle web-search gulp)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,6 +51,7 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias simpleserver='python -m SimpleHTTPServer'
 # Replace system's vim with macvim (brew install macvim)
 alias vim='mvim -v'
+alias vi='mvim -v'
 
 # Update eveything (except Mac App Store)
 update_all() {
@@ -72,7 +73,7 @@ clean_all() {
 }
 
 # Set default editor
-export EDITOR=vim
+export EDITOR='mvim -v'
 
 # Optimize Make
 export JOBS=2
@@ -91,3 +92,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 
 # Set priority on imported binaries rather than system's ones
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
+
+# Additional completion support
+#eval "$(gulp --completion=zsh)"
+eval "$(grunt --completion=zsh)"
