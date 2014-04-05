@@ -114,7 +114,7 @@ let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
 Bundle "evanmiller/nginx-vim-syntax"
 " YAML_____________________________________________________
 Bundle 'chase/vim-ansible-yaml'
-au BufNewFile,BufRead minion set filetype=yaml
+au BufNewFile,BufRead minion,*.sls set filetype=yaml
 " PERL_____________________________________________________
 Bundle "vim-scripts / perl-support.vim"
 " Ruby_____________________________________________________
@@ -133,6 +133,8 @@ Bundle "pangloss/vim-javascript"
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+" JQuery tag completion
+Bundle 'firat/tagcomplete'
 " CoffeScript (provides CoffeeMake)________________________
 Bundle 'kchmck/vim-coffee-script'
 let coffee_make_options = '--bare -o ~/tmp' " compile without top-level function: usefull for syntax checks
@@ -154,12 +156,12 @@ Bundle 'tpope/vim-cucumber'
 Bundle 'drichard/vim-brunch'
 " Grunt
 Bundle 'mklabs/grunt.vim'
-" CtrlP Fast fuzzy search. Use it with <C-p>
+" CtrlP Fast fuzzy search. Use it with <C-p>_______________
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = '~/tmp/cache/ctrlp'
 set wildignore+=node_modules,bower_components,tmp,build,dist
-" Add closing parenthesis, bracket, quotes
+" Add closing parenthesis, bracket, quotes_________________
 Bundle 'Raimondi/delimitMate'
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
 au FileType vim,html,svg,xml let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
@@ -169,17 +171,15 @@ au FileType html,js,coffee let b:delimitMate_quotes = "\" '"
 Bundle 'closetag.vim'
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako,svg let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,xsd,wsdl,htmldjango,jinjahtml,eruby,mako,byt,svg source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
-" Change surrounding: 'test' -> <p>test</p> : cs'<p>
+" Change surrounding: 'test' -> <p>test</p> : cs'<p>_______
 Bundle 'tpope/vim-surround'
-" Show marks for fast code jumps
+" Show marks for fast code jumps___________________________
 Bundle 'ShowMarks'
 nmap <F2> :ShowMarksToggle<CR>
 let g:showmarks_enable=0 " avoid automatically showing marks
-" Completion with tab in search window
+" Completion with tab in search window_____________________
 Bundle 'SearchComplete'
-" JQuery tag completion
-Bundle 'firat/tagcomplete'
-" File system explorer
+" File system explorer_____________________________________
 Bundle 'scrooloose/nerdtree'
 autocmd vimenter * if !argc() | NERDTree | endif " open Nerdtree if no file specified at start
 nmap <F3> :NERDTreeToggle<CR>
@@ -468,3 +468,5 @@ Bundle 'm2mdas/phpcomplete-extended'
 Bundle 'violetyk/neocomplete-php.vim'
 " VDebug (PHP, Ruby, Python, NodeJS)_______________________
 Bundle 'joonty/vdebug.git'
+" NGINX syntax_____________________________________________
+Bundle "evanmiller/nginx-vim-syntax"
