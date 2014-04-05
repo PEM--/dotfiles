@@ -110,6 +110,13 @@ Bundle 'gmarik/vundle'
 " Press '<leader>ce'(':ColorVEdit') in 'LightSlateGray'
 Bundle 'Rykka/colorv.vim'
 let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
+" HTTP server configuration________________________________
+Bundle "evanmiller/nginx-vim-syntax"
+" YAML_____________________________________________________
+Bundle 'chase/vim-ansible-yaml'
+au BufNewFile,BufRead minion set filetype=yaml
+" PERL_____________________________________________________
+Bundle "vim-scripts / perl-support.vim"
 " Ruby_____________________________________________________
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
