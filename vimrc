@@ -112,11 +112,11 @@ Bundle 'Rykka/colorv.vim'
 let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
 " HTTP server configuration________________________________
 Bundle "evanmiller/nginx-vim-syntax"
-" YAML_____________________________________________________
+" YAML & Jinja2____________________________________________
 Bundle 'chase/vim-ansible-yaml'
 au BufNewFile,BufRead minion,*.sls set filetype=yaml
 " PERL_____________________________________________________
-Bundle "vim-scripts / perl-support.vim"
+Bundle "vim-scripts/perl-support.vim"
 " Ruby_____________________________________________________
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
