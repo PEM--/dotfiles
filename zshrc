@@ -52,6 +52,8 @@ alias simpleserver='python -m SimpleHTTPServer'
 # Replace system's vim with macvim (brew install macvim)
 alias vim='mvim -v'
 alias vi='mvim -v'
+# Colortail: https://github.com/joakim666/colortail
+alias tail='colortail -k ~/.colortail/conf.default '
 
 # Update eveything (except Mac App Store)
 update_all() {
