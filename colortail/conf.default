@@ -15,7 +15,7 @@ COLOR green
 # matches the word INFO
 ^.*(INFO|info).*$
 }
-COLOR grey
+COLOR cyan
 {
 # matches the word DEBUG
 ^.*(DEBUG|debug).*$
