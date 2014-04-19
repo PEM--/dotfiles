@@ -93,13 +93,8 @@ set noshowmode
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tlib'
-" See tab indendation
-Bundle 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=white
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=lightgrey
+" See tab indendation______________________________________
+Bundle 'Yggdroot/indentLine'
 " Comment line selected in visual mode: best combo: <Leader>c<Space>
 Bundle 'scrooloose/nerdcommenter'
 " Changes the project's working directory to the project root when opening a file
@@ -110,6 +105,7 @@ Bundle 'gmarik/vundle'
 " Press '<leader>ce'(':ColorVEdit') in 'LightSlateGray'
 Bundle 'Rykka/colorv.vim'
 let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
+Bundle 'lilydjwg/colorizer'
 " HTTP server configuration________________________________
 Bundle "evanmiller/nginx-vim-syntax"
 " YAML & Jinja2____________________________________________
@@ -160,7 +156,8 @@ Bundle 'mklabs/grunt.vim'
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = '~/tmp/cache/ctrlp'
-set wildignore+=node_modules,bower_components,tmp,build,dist
+"set wildignore+=node_modules,bower_components,tmp,build,dist,www
+set wildignore+=node_modules,tmp,build,dist,www
 " Add closing parenthesis, bracket, quotes_________________
 Bundle 'Raimondi/delimitMate'
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
