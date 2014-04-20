@@ -208,29 +208,30 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'BlockHL'
 " Syntax for MarkDown files
 Bundle 'tpope/vim-markdown'
-" Syntax for JADE files
+" Syntax for JADE files____________________________________
 Bundle 'digitaltoad/vim-jade'
-" Syntax for Mustache
+au BufNewFile,BufRead,BufReadPost *.jade.html set filetype=jade
+" Syntax for Mustache______________________________________
 Bundle 'mustache/vim-mustache-handlebars'
 let g:mustache_abbreviations=1
-" Syntax for Haml, Sass, SCSS
+" Syntax for Haml, Sass, SCSS______________________________
 Bundle 'tpope/vim-haml'
-" Syntax for CSS3 files
+" Syntax for CSS3 files____________________________________
 Bundle 'hail2u/vim-css3-syntax'
-" Syntax for LESS files
+" Syntax for LESS files____________________________________
 Bundle 'groenewege/vim-less'
-" Syntax for STYLUS files
+" Syntax for STYLUS files__________________________________
 Bundle 'wavded/vim-stylus'
-" Syntax for HTML5 files
+" Syntax for HTML5 files___________________________________
 Bundle 'othree/html5.vim'
-" Snippets
+" Snippets_________________________________________________
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'Jasmine-snippets-for-snipMate'
 Bundle 'carlosvillu/coffeScript-VIM-Snippets'
-" Analyse CTags and present them in a window
+" Analyse CTags and present them in a window_______________
 Bundle 'majutsushi/tagbar'
 "autocmd VimEnter * nested :call tagbar#autoopen(1) " Auto open tagbar for handled files
 let g:tagbar_width=25
