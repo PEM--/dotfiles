@@ -225,7 +225,6 @@ Bundle 'wavded/vim-stylus'
 " Syntax for HTML5 files___________________________________
 Bundle 'othree/html5.vim'
 " Snippets_________________________________________________
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
@@ -466,5 +465,3 @@ Bundle 'm2mdas/phpcomplete-extended'
 Bundle 'violetyk/neocomplete-php.vim'
 " VDebug (PHP, Ruby, Python, NodeJS)_______________________
 Bundle 'joonty/vdebug.git'
-" NGINX syntax_____________________________________________
-Bundle "evanmiller/nginx-vim-syntax"

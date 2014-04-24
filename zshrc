@@ -33,7 +33,7 @@ bindkey ';5C' emacs-forward-word
 alias cat='~/dotfiles/utils/codecat.sh'
 
 # Oh-my-zsh plugins
-plugins=(git bower brew cake coffee colored-man colorize cp dircycle extract gem git history node npm osx pass pip python redis-cli terminalapp themes urltools vundle web-search gulp)
+plugins=(git bower brew cake coffee colored-man colorize cp dircycle extract gem git history node npm osx pass pip python redis-cli terminalapp themes urltools vundle web-search gulp meteor)
 
 source $ZSH/oh-my-zsh.sh
 
