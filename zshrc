@@ -54,6 +54,8 @@ alias vim='mvim -v'
 alias vi='mvim -v'
 # Colortail: https://github.com/joakim666/colortail
 alias tail='colortail -k ~/.colortail/conf.default '
+# Trash: https://github.com/sindresorhus/trash
+alias rm='trash'
 
 # Update eveything (except Mac App Store)
 update_all() {
