@@ -27,6 +27,7 @@ cnoremap <C-n> <Down>
 "Add syntax highlighting for filetypes
 au BufNewFile,BufRead *.wsdl,*.xsd set filetype=xml
 au BufReadPost *.cnf set filetype=dosini
+au BufNewFile,BufReadPost *.require set filetype=json
 " Search___________________________________________________
 " Case management when searching (replacing)
 set ignorecase smartcase
