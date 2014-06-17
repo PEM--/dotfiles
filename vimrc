@@ -94,6 +94,11 @@ set noshowmode
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tlib'
+" Fish integration_________________________________________
+Bundle 'dag/vim-fish'
+if &shell =~# 'fish$'
+  set shell=sh
+endif
 " See tab indendation______________________________________
 Bundle 'Yggdroot/indentLine'
 " Comment line selected in visual mode: best combo: <Leader>c<Space>

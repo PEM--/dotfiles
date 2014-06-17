@@ -12,6 +12,7 @@ Configured tools:
 
 * vim (MacVim)
 * zsh
+* fish
 * tmux
 * ls++
 * git
