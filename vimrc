@@ -94,6 +94,8 @@ set noshowmode
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tlib'
+" Abolish (search/replacement enhancements)________________
+Bundle 'tpope/vim-abolish'
 " Fish integration_________________________________________
 Bundle 'dag/vim-fish'
 if &shell =~# 'fish$'
