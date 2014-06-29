@@ -70,8 +70,10 @@ set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Goog
 # Some environmental variables mainly for Android's SDK
 set -x ANDROID_HOME /usr/local/opt/android-sdk
 set -x PATH $PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
-set -xJAVA_HOME=/Library/Java/Home
+set -x JAVA_HOME=/Library/Java/Home
 # Some environmental variables for NodeJS
 set -x NODE_PATH /usr/local/lib/node_modules
 # Set priority on imported binaries rather than system's ones
 set -x PATH /usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
+# Environment for ATOM
+set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
