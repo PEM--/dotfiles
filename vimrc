@@ -148,6 +148,9 @@ let coffee_lint_options='-f ~/.coffeelint.json'
 let coffee_linter='/usr/local/bin/coffeelint'
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 Bundle 'mintplant/vim-literate-coffeescript'
+" TernJS___________________________________________________
+Bundle 'marijnh/tern_for_vim'
+Bundle 'othree/tern_for_vim_coffee'
 " Better JSON syntax highlighting
 Bundle 'elzr/vim-json'
 " Fork of a.vim for CoffeeScript: Switch from JS to Coffee (or h to c for C) with :A or :AS
@@ -249,21 +252,21 @@ map <F8> :let x = system('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q . >/d
 " Better tags definition: brew install ctags-exuberant
 set tags=./tags,tags;/
 " CoffeeScript : gem install coffeetags
-"if executable('coffeetags')
-  "let g:tagbar_type_coffee = {
-        "\ 'ctagsbin' : 'coffeetags',
-        "\ 'ctagsargs' : '--include-vars',
-        "\ 'kinds' : [
-        "\ 'f:functions',
-        "\ 'o:object',
-        "\ ],
-        "\ 'sro' : ".",
-        "\ 'kind2scope' : {
-        "\ 'f' : 'object',
-        "\ 'o' : 'object',
-        "\ }
-        "\ }
-"endif
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '--include-vars',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
+endif
 " Markdown support
 let g:tagbar_type_markdown = {
   \ 'ctagstype' : 'markdown',
@@ -321,84 +324,85 @@ map <S-Tab> <C-W>p
 map <C-w>- :split<CR>
 map <C-w><Bar> :vsplit<CR>
 " OmniCompletion___________________________________________
-set ofu=syntaxcomplete#Complete
-"let g:SuperTabDefaultCompletionType="<C-X><C-O>"
-let g:SuperTabDefaultCompletionType='<Tab>'
-let g:SuperTabDefaultCompletionType="context"
-set completeopt=longest,menuone,preview
-set wildmenu
-set wildmode=full
+"set ofu=syntaxcomplete#Complete
+""let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+"let g:SuperTabDefaultCompletionType='<Tab>'
+"let g:SuperTabDefaultCompletionType="context"
+"set completeopt=longest,menuone,preview
+"set wildmenu
+"set wildmode=full
 "NeoComplete_______________________________________________
-Bundle 'Shougo/vimshell.vim'
-Bundle 'Shougo/neocomplete.vim'
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-endfunction
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown,jade setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript,coffeescript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns={}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"Bundle 'Shougo/vimshell.vim'
+"Bundle 'Shougo/neocomplete.vim'
+"let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"let g:neocomplete#sources#dictionary#dictionaries = {
+    "\ 'default' : '',
+    "\ 'vimshell' : $HOME.'/.vimshell_hist',
+    "\ 'scheme' : $HOME.'/.gosh_completions'
+        "\ }
+"if !exists('g:neocomplete#keyword_patterns')
+  "let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"inoremap <expr><C-g> neocomplete#undo_completion()
+"inoremap <expr><C-l> neocomplete#complete_common_string()
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
+"endfunction
+"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y> neocomplete#close_popup()
+"inoremap <expr><C-e> neocomplete#cancel_popup()
+"autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown,jade setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript,coffeescript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns={}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " Neo Snippets___________________________________________
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
+"Bundle 'Shougo/neosnippet'
+"Bundle 'Shougo/neosnippet-snippets'
 " Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+"imap <C-k> <Plug>(neosnippet_expand_or_jump)
+"smap <C-k> <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k> <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: "\<TAB>"
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  "\ "\<Plug>(neosnippet_expand_or_jump)"
+  "\: pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  "\ "\<Plug>(neosnippet_expand_or_jump)"
+  "\: "\<TAB>"
 " For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+"if has('conceal')
+  "set conceallevel=2 concealcursor=i
+"endif
 " SyntaxComplete_________________________________________
-Bundle 'vim-scripts/SyntaxComplete'
+"Bundle 'vim-scripts/SyntaxComplete'
 " JavaScript libraries completion
 Bundle 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs='jquery,angularjs'
-" Clang Complete__________________________________________
-"Bundle 'Rip-Rip/clang_complete'
 "let g:clang_use_library=1
 " You Complete Me_________________________________________
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
 " Vim marching (completion based on clang)
-Bundle 'Shougo/vimproc'
-Bundle 'osyo-manga/vim-reunions'
-Bundle 'osyo-manga/vim-marching'
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+"Bundle 'Shougo/vimproc'
+"Bundle 'osyo-manga/vim-reunions'
+"Bundle 'osyo-manga/vim-marching'
+"let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
 " Vertical splitter________________________________________
 hi VertSplit guibg=black guifg=darkgrey
 set fillchars=vert:\ 
@@ -466,10 +470,10 @@ let g:quickrun_config = {
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 " PHP______________________________________________________
-Bundle 'StanAngeloff/php.vim'
-Bundle 'Shougo/unite.vim'
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'm2mdas/phpcomplete-extended'
-Bundle 'violetyk/neocomplete-php.vim'
+"Bundle 'StanAngeloff/php.vim'
+"Bundle 'Shougo/unite.vim'
+"Bundle 'shawncplus/phpcomplete.vim'
+"Bundle 'm2mdas/phpcomplete-extended'
+"Bundle 'violetyk/neocomplete-php.vim'
 " VDebug (PHP, Ruby, Python, NodeJS)_______________________
 Bundle 'joonty/vdebug.git'
