@@ -42,7 +42,7 @@ function update_all
   brew update
   brew upgrade
   brew cask update
-  npm -g update
+  npm -gf update
   #upgrade_oh_my_zsh
   #vundle-update
 end
@@ -54,7 +54,6 @@ function clean_all
   brew cask cleanup
   npm cache clean
 end
-
 
 # Exports
 # Set default compilation and linking flags
@@ -74,6 +73,6 @@ set -x JAVA_HOME=/Library/Java/Home
 # Some environmental variables for NodeJS
 set -x NODE_PATH /usr/local/lib/node_modules
 # Set priority on imported binaries rather than system's ones
-set -x PATH /usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
+set -x PATH ~/.meteor/tools/latest/bin:/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 # Environment for ATOM
 set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
