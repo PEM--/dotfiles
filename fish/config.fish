@@ -30,7 +30,7 @@ alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # Create a simple HTTP server on port 8000 in the current dir
-alias simpleserver='python -m SimpleHTTPServer'
+alias simpleserver='node /usr/local/bin/nano-server'
 # Colortail: https://github.com/joakim666/colortail
 alias tail='colortail -k ~/.colortail/conf.default '
 # Trash: https://github.com/sindresorhus/trash
