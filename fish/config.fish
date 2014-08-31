@@ -37,7 +37,7 @@ alias rm='trash'
 alias cp='cpy'
 # Htop
 #alias top='htop'
-# VTop
+# VTop: npm -g install vtop
 alias top='vtop'
 
 # Update eveything (except Mac App Store)
