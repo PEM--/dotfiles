@@ -39,6 +39,8 @@ alias cp='cpy'
 #alias top='htop'
 # VTop: npm -g install vtop
 alias top='vtop'
+# Mkdirp: npm -g install mkdirp
+alias mkdir='mkdirp'
 
 # Update eveything (except Mac App Store)
 function update_all
