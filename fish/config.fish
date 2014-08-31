@@ -22,8 +22,6 @@ alias vim="mvim -v"
 alias vi="mvim -v"
 # cat with pygments
 alias cat='~/dotfiles/utils/codecat.sh'
-# a better top
-alias top='htop'
 # Quicklook in CLI
 alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
 # IP's address made simple
@@ -33,8 +31,14 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias simpleserver='node /usr/local/bin/nano-server'
 # Colortail: https://github.com/joakim666/colortail
 alias tail='colortail -k ~/.colortail/conf.default '
-# Trash: https://github.com/sindresorhus/trash
+# Trash: npm -g install trash
 alias rm='trash'
+# Cpy: npm -g install cpy
+alias cp='cpy'
+# Htop
+#alias top='htop'
+# VTop
+alias top='vtop'
 
 # Update eveything (except Mac App Store)
 function update_all
@@ -42,7 +46,8 @@ function update_all
   brew update
   brew upgrade
   brew cask update
-  npm -gf update
+  #npm -gf update
+  npm -g update
   #upgrade_oh_my_zsh
   #vundle-update
 end
@@ -76,3 +81,5 @@ set -x NODE_PATH /usr/local/lib/node_modules
 set -x PATH ~/.meteor/tools/latest/bin:/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 # Environment for ATOM
 set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
+# Environment for boot2docker
+set -x DOCKER_HOST tcp://192.168.59.103:2375
