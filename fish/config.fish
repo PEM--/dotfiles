@@ -20,7 +20,7 @@ alias la='ls -a'
 # Replace system's vim with macvim (brew install macvim)
 alias vim="mvim -v"
 alias vi="mvim -v"
-# cat with pygments
+# cat with Pygments: sudo easy_install Pygments
 alias cat='~/dotfiles/utils/codecat.sh'
 # Quicklook in CLI
 alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
