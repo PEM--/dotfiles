@@ -75,7 +75,7 @@ set -x FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Conte
 set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
 # Some environmental variables mainly for Android's SDK
 set -x ANDROID_HOME /usr/local/opt/android-sdk
-set -x PATH $PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
+set -x PATH /usr/local/sbin $PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/tools
 set -x JAVA_HOME=/Library/Java/Home
 # Some environmental variables for NodeJS
 set -x NODE_PATH /usr/local/lib/node_modules
