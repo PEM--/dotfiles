@@ -394,10 +394,10 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs='jquery,angularjs'
 "let g:clang_use_library=1
 " You Complete Me_________________________________________
-Bundle 'Valloric/YouCompleteMe'
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
+"Bundle 'Valloric/YouCompleteMe'
+"let g:ycm_add_preview_to_completeopt=0
+"let g:ycm_confirm_extra_conf=0
+"set completeopt-=preview
 " Vim marching (completion based on clang)
 "Bundle 'Shougo/vimproc'
 "Bundle 'osyo-manga/vim-reunions'
