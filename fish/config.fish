@@ -34,7 +34,7 @@ alias tail='colortail -k ~/.colortail/conf.default '
 # Trash: npm -g install trash
 alias rm='trash'
 # Cpy: npm -g install cpy
-alias cp='cpy'
+#alias cp='cpy'
 # Htop
 #alias top='htop'
 # VTop: npm -g install vtop
