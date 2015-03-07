@@ -31,3 +31,5 @@
 	required = true
 [diff]
 	tool = icdiff
+[credential]
+	helper = cache

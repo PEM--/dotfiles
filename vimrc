@@ -207,7 +207,7 @@ let NERDTreeShowHidden=1
 "let g:miniBufExplCloseOnSelect=1      " Close MBE on buffer selection
 " Ag is available here: https://github.com/ggreer/the_silver_searcher
 Bundle 'rking/ag.vim'
-map <C-F> :Ag! 
+map <C-F> :Ag!
 " Syntax for AS files
 Bundle 'endel/flashdevelop.vim'
 " Align selected text in visual mode on a parttern. Example with a =: :Tab /=
@@ -405,6 +405,7 @@ let g:used_javascript_libs='jquery,angularjs'
 "let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
 " Vertical splitter________________________________________
 hi VertSplit guibg=black guifg=darkgrey
+"NOTE: The next line ends up wit a significant white space
 set fillchars=vert:\ 
 "File navigation
 map <C-e> <Esc>:Exp<CR>
@@ -436,9 +437,9 @@ let g:languagetool_jar='~/.vim/tools/LanguageTool/LanguageTool.jar'
 " Vimux____________________________________________________
 Bundle 'benmills/vimux'
 " Jedi (Python IDE)________________________________________
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
 let g:jedi#popup_on_dot = 0
-"let g:jedi#autocompletion_command = "<Tab>"
+let g:jedi#autocompletion_command = "<Tab>"
 " Vim-Pasta : Meilleur paste
 Bundle 'sickill/vim-pasta'
 " Quickfixsigns : Ajout de marqueur lors de bookmarks de lignes
