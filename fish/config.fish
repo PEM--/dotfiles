@@ -46,7 +46,7 @@ alias mkdir='mkdirp'
 function update_all
   sudo gem update --system
   brew update
-  brew upgrade
+  brew upgrade --all
   brew cask update
   #npm -gf update
   npm -g update
@@ -83,5 +83,10 @@ set -x NODE_PATH /usr/local/lib/node_modules
 set -x PATH ~/.meteor/tools/latest/bin:/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 # Environment for ATOM
 set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
-# Environment for boot2docker
-set -x DOCKER_HOST tcp://192.168.59.103:2375
+# Docker
+alias d='docker'
+alias dp='d ps'
+alias dpa='dp -a'
+set -x DOCKER_HOST tcp://192.168.59.103:2376
+set -x DOCKER_CERT_PATH /Users/PEM/.boot2docker/certs/boot2docker-vm
+set -x DOCKER_TLS_VERIFY 1
