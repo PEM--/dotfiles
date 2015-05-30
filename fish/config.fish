@@ -17,6 +17,9 @@ alias ll='ls -Glh'
 alias lll='ls -Glh | less'
 alias l='ls'
 alias la='ls -a'
+# Regular commands
+alias df='df -h'
+alias du='du -h'
 # Replace system's vim with macvim (brew install macvim)
 alias vim="mvim -v"
 alias vi="mvim -v"
@@ -87,6 +90,7 @@ set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
 alias d='docker'
 alias dp='d ps'
 alias dpa='dp -a'
+alias di='d images'
 set -x DOCKER_HOST tcp://192.168.59.103:2376
 set -x DOCKER_CERT_PATH /Users/PEM/.boot2docker/certs/boot2docker-vm
 set -x DOCKER_TLS_VERIFY 1
