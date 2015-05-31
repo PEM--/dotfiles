@@ -91,6 +91,6 @@ alias d='docker'
 alias dp='d ps'
 alias dpa='dp -a'
 alias di='d images'
-set -x DOCKER_HOST tcp://192.168.59.103:2376
+set -x DOCKER_HOST tcp://(boot2docker ip):2376
 set -x DOCKER_CERT_PATH /Users/PEM/.boot2docker/certs/boot2docker-vm
 set -x DOCKER_TLS_VERIFY 1
