@@ -1,0 +1,20 @@
+---
+env:
+  browser: true
+  node: true
+  es6: true
+  meteor: true
+  mongo: true
+  jquery: true
+ecmaFeatures:
+  arrowFunctions: true
+  blockBindings: true
+  classes: true
+  defaultParams: true 
+  forOf: true
+  jsx: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  spread: true
+  superInFunctions: true
+  
