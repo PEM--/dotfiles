@@ -1,4 +1,6 @@
 ---
+# Add Babel plugins for decorators
+parser: babel-eslint
 # From: http://willchen.posthaven.com/eslint
 env:
   node: true # for node.js environments

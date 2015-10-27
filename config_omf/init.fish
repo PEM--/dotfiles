@@ -57,6 +57,11 @@ function clean_all
   npm cache clean
 end
 
+# Remove all DS_Store
+function removeDsStore
+  find . -name '*.DS_Store' -type f -delete
+end
+
 # Exports
 # Set default compilation and linking flags
 set -x CPPFLAGS "-I/usr/local/opt/qt5/include"
