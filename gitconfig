@@ -12,6 +12,7 @@
 	diff = auto
 	status = auto
 	branch = auto
+	ui = true
 [web]
 	browser = chromium-browser
 [core]
