@@ -35,6 +35,8 @@ alias rm='trash'
 alias top='vtop'
 # Mkdirp: npm -g install mkdirp
 alias mkdir='mkdirp'
+# Reset DNS cache
+alias resetdns='sudo killall -HUP mDNSResponder'
 
 # Update eveything (except Mac App Store)
 function update_all
