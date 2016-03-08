@@ -36,7 +36,9 @@ alias top='vtop'
 # Mkdirp: npm -g install mkdirp
 alias mkdir='mkdirp'
 # Reset DNS cache
-alias resetdns='sudo killall -HUP mDNSResponder'
+alias dnsreset='sudo killall -HUP mDNSResponder'
+# Remove dangling images
+alias removeDangling='docker images -qf dangling=true | xargs docker rmi'
 
 # Update eveything (except Mac App Store)
 function update_all
