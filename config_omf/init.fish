@@ -87,6 +87,8 @@ set -x NODE_PATH /usr/local/lib/node_modules
 set -x PATH ~/.meteor/tools/latest/bin:/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 # Environment for ATOM
 set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
+# VS Code
+set -x VSCODE_TSJS 1
 # Docker
 alias d='docker'
 alias dp='d ps'
