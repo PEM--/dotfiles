@@ -9,18 +9,20 @@ env:
   meteor: true
   mongo: true
   jquery: true
-ecmaFeatures:
-  arrowFunctions: true
-  blockBindings: true
-  classes: true
-  defaultParams: true
-  forOf: true
-  jsx: true
-  objectLiteralShorthandMethods: true
-  objectLiteralShorthandProperties: true
-  spread: true
-  superInFunctions: true
-  experimentalObjectRestSpread: true
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    arrowFunctions: true
+    blockBindings: true
+    classes: true
+    defaultParams: true
+    forOf: true
+    jsx: true
+    objectLiteralShorthandMethods: true
+    objectLiteralShorthandProperties: true
+    spread: true
+    superInFunctions: true
+    experimentalObjectRestSpread: true
 
 # Rules
 
@@ -99,10 +101,10 @@ rules:
   no-new-wrappers:       2 # disallows creating new instances of String,Number, and Boolean
   no-octal:              2 # disallow use of octal literals
   no-octal-escape:       2 # disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
-  no-process-env:        1 # disallow use of process.env (off by default)
+  no-process-env:        0 # disallow use of process.env (off by default)
   no-proto:              2 # disallow usage of __proto__ property
   no-redeclare:          2 # disallow declaring the same variable more then once
-  no-return-assign:      2 # disallow use of assignment in return statement
+  no-return-assign:      0 # disallow use of assignment in return statement
   no-script-url:         2 # disallow use of javascript: urls.
   no-self-compare:       2 # disallow comparisons where both sides are exactly the same (off by default)
   no-sequences:          2 # disallow use of comma operator
