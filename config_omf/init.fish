@@ -73,18 +73,12 @@ set -x LDFLAGS "-L/usr/local/opt/qt5/lib"
 # Set default editor
 set -x EDITOR 'mvim -v'
 # Optimize Make
-set -x JOBS=2
+set -x JOBS 2
 # Some environmental variables mainly for Karma (web test runner)
 set -x FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
 set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
-# Some environmental variables mainly for Android's SDK
-set -x ANDROID_HOME ~/Library/Android/sdk
-set -x PATH /usr/local/sbin $PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/tools
-set -x JAVA_HOME=/Library/Java/Home
 # Some environmental variables for NodeJS
 set -x NODE_PATH /usr/local/lib/node_modules
-# Set priority on imported binaries rather than system's ones
-set -x PATH ~/.meteor/tools/latest/bin:/usr/local/sbin:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 # Environment for ATOM
 set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
 # VS Code
