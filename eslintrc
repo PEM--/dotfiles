@@ -171,7 +171,7 @@ rules:
   no-lonely-if:                       2 # disallow if as the only statement in an else block (off by default)
   no-mixed-spaces-and-tabs:           1 # disallow mixed spaces and tabs for indentation
   no-multiple-empty-lines:            0 # disallow multiple empty lines (off by default)
-  no-nested-ternary:                  1 # disallow nested ternary expressions (off by default)
+  no-nested-ternary:                  0 # disallow nested ternary expressions (off by default)
   no-new-object:                      1 # disallow use of the Object constructor
   no-space-before-semi:               0 # disallow space before semicolon
   no-spaced-func:                     2 # disallow space between function identifier and application
