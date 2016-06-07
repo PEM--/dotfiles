@@ -16,3 +16,4 @@ Configured tools:
 * tmux
 * ls++
 * git
+* eslint*
