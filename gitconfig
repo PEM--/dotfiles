@@ -18,6 +18,7 @@
 [core]
 	excludefile = /home/pem/.gitignore_global
 	excludesfile = /Users/PEM/.gitignore_global
+	editor = /usr/bin/vim
 [push]
 	default = simple
 [difftool "sourcetree"]
