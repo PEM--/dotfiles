@@ -1,5 +1,8 @@
 # Remove Fish's greeting
 set -g -x fish_greeting ''
+# Key bindings
+# CTRL+k: Set current process in foreground
+bind \ck 'fg %'
 # Aliases
 # ls enhancements
 alias l="ls"
@@ -37,8 +40,9 @@ alias top='vtop'
 alias mkdir='mkdirp'
 # Reset DNS cache
 alias dnsreset='sudo killall -HUP mDNSResponder'
-# Remove dangling images
-alias removeDangling='docker images -qf dangling=true | xargs docker rmi'
+# Atom alias
+alias editor='Atom'
+alias atom='Atom'
 
 # Update eveything (except Mac App Store)
 function update_all
@@ -49,7 +53,6 @@ function update_all
   omf update
   #npm -gf update
   npm -g update
-  #upgrade_oh_my_zsh
   #vundle-update
 end
 
@@ -79,8 +82,6 @@ set -x FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Conte
 set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
 # Some environmental variables for NodeJS
 set -x NODE_PATH /usr/local/lib/node_modules
-# Environment for ATOM
-set -x ATOM_PATH /opt/homebrew-cask/Caskroom/atom/latest
 # VS Code
 set -x VSCODE_TSJS 1
 # Docker
@@ -90,6 +91,8 @@ alias dpa='dp -a'
 alias di='d images'
 alias dm='docker-machine'
 alias dc='docker-compose'
+# Remove dangling images
+alias removeDangling='docker images -qf dangling=true | xargs docker rmi'
 
 # Configuration for plugin-peco
 function peco_select_history

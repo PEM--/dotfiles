@@ -35,3 +35,6 @@
 	tool = icdiff
 [credential]
 	helper = cache
+[color "diff"]
+	old = red strike
+	new = green italic
