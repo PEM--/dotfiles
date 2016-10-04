@@ -48,7 +48,7 @@ alias atom='Atom'
 function update_all
   sudo gem update --system
   brew update
-  brew upgrade --all
+  brew upgrade
   brew cask update
   omf update
   #npm -gf update
