@@ -1,8 +1,8 @@
 ---
 # Add Babel plugins for decorators
 parser: babel-eslint
-plugins:
-  - class-property
+#plugins:
+#  - class-property
 # From: http://willchen.posthaven.com/eslint
 env:
   node: true # for node.js environments

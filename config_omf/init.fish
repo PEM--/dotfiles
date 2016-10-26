@@ -93,6 +93,8 @@ alias dm='docker-machine'
 alias dc='docker-compose'
 # Remove dangling images
 alias removeDangling='docker images -qf dangling=true | xargs docker rmi'
+# Less with colors by default
+alias less='less -R'
 
 # Configuration for plugin-peco
 function peco_select_history
@@ -108,3 +110,7 @@ function peco_select_history
     commandline ''
   end
 end
+
+# Add yarn's bin path
+set -x YARN_BIN (yarn global bin | grep -o '/.*')
+set -x PATH $YARN_BIN $PATH
