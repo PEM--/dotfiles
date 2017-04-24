@@ -4,6 +4,6 @@ package git-flow
 package osx
 package peco
 package ssh-term-helper
-theme dangerous
 theme default
 theme eclm
+theme mars

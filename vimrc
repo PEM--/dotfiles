@@ -111,8 +111,8 @@ let g:rooter_use_lcd=1
 " Let Vundle manage Vundle: Use :BundleInstall to install all plugins
 Bundle 'gmarik/vundle'
 " Press '<leader>ce'(':ColorVEdit') in 'LightSlateGray'
-Bundle 'Rykka/colorv.vim'
-let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
+"Bundle 'Rykka/colorv.vim'
+"let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
 Bundle 'lilydjwg/colorizer'
 " HTTP server configuration________________________________
 Bundle "evanmiller/nginx-vim-syntax"
@@ -477,4 +477,4 @@ Bundle 'rizzatti/dash.vim'
 "Bundle 'm2mdas/phpcomplete-extended'
 "Bundle 'violetyk/neocomplete-php.vim'
 " VDebug (PHP, Ruby, Python, NodeJS)_______________________
-Bundle 'joonty/vdebug.git'
+"Bundle 'joonty/vdebug.git'

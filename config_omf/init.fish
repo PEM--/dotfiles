@@ -15,8 +15,8 @@ alias la='ls -a'
 alias df='df -h'
 alias du='du -h'
 # Replace system's vim with macvim (brew install macvim)
-alias vim="mvim -v"
-alias vi="mvim -v"
+alias vim="/usr/local/opt/macvim/MacVim.app/Contents/MacOS/Vim -v"
+alias vi="/usr/local/opt/macvim/MacVim.app/Contents/MacOS/Vim -v"
 # cat with Pygments: sudo easy_install Pygments
 alias cat='~/dotfiles/utils/codecat.sh'
 # Quicklook in CLI
@@ -49,7 +49,7 @@ function update_all
   sudo gem update --system
   brew update
   brew upgrade
-  brew cask update
+  #brew cask update
   omf update
   #npm -gf update
   npm -g update
@@ -77,6 +77,9 @@ set -x LDFLAGS "-L/usr/local/opt/qt5/lib"
 set -x EDITOR 'mvim -v'
 # Optimize Make
 set -x JOBS 2
+# Set Android SDK
+#set -x ANDROID_HOME $HOME/Library/Android/sdk
+#set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 # Some environmental variables mainly for Karma (web test runner)
 set -x FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
 set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'

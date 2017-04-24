@@ -38,3 +38,5 @@
 [color "diff"]
 	old = red strike
 	new = green italic
+[merge "donttouch"]
+	driver = true
