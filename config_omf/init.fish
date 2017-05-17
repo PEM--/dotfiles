@@ -71,22 +71,22 @@ end
 
 # Exports
 # Set default compilation and linking flags
-set -x CPPFLAGS "-I/usr/local/opt/qt5/include"
-set -x LDFLAGS "-L/usr/local/opt/qt5/lib"
+set -xg CPPFLAGS "-I/usr/local/opt/qt5/include"
+set -xg LDFLAGS "-L/usr/local/opt/qt5/lib"
 # Set default editor
-set -x EDITOR 'mvim -v'
+set -xg EDITOR '/usr/bin/vi'
 # Optimize Make
-set -x JOBS 2
+set -xg JOBS 2
 # Set Android SDK
-#set -x ANDROID_HOME $HOME/Library/Android/sdk
-#set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+set -xg ANDROID_HOME $HOME/Library/Android/sdk
+set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 # Some environmental variables mainly for Karma (web test runner)
-set -x FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
-set -x CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
+set -xg FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
+set -xg CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
 # Some environmental variables for NodeJS
-set -x NODE_PATH /usr/local/lib/node_modules
+set -xg NODE_PATH /usr/local/lib/node_modules
 # VS Code
-set -x VSCODE_TSJS 1
+set -xg VSCODE_TSJS 1
 # Docker
 alias d='docker'
 alias dp='d ps'
@@ -115,5 +115,5 @@ function peco_select_history
 end
 
 # Add yarn's bin path
-set -x YARN_BIN (yarn global bin | grep -o '/.*')
+set -xg YARN_BIN (yarn global bin | grep -o '/.*')
 set -x PATH $YARN_BIN $PATH
