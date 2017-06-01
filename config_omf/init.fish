@@ -62,6 +62,7 @@ function clean_all
   brew cleanup
   brew cask cleanup
   npm cache verify
+  yarn cache clean
 end
 
 # Remove all DS_Store
