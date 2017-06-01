@@ -61,7 +61,7 @@ function clean_all
   sudo gem clean
   brew cleanup
   brew cask cleanup
-  npm cache clean
+  npm cache verify
 end
 
 # Remove all DS_Store
@@ -79,7 +79,9 @@ set -xg EDITOR '/usr/bin/vi'
 set -xg JOBS 2
 # Set Android SDK
 set -xg ANDROID_HOME $HOME/Library/Android/sdk
-set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools
+#set -xg ANDROID_HOME $HOME/android-sdk
+#set -xg PATH $PATH $ANDROID_HOME $ANDROID_HOME/bin $ANDDROID_HOME/platform-tools $ANDROID_HOME/tools
 # Some environmental variables mainly for Karma (web test runner)
 set -xg FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
 set -xg CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
