@@ -24,8 +24,6 @@ alias ql="qlmanage -p 2>/dev/null" # preview a file using QuickLook
 # IP's address made simple
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-# Create a simple HTTP server on port 8000 in the current dir
-alias simpleserver='node /usr/local/bin/nano-server'
 # Colortail: https://github.com/joakim666/colortail
 alias tail='colortail -k ~/.colortail/conf.default '
 # Trash: npm -g install trash
@@ -90,6 +88,10 @@ set -xg CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Goo
 set -xg NODE_PATH /usr/local/lib/node_modules
 # VS Code
 set -xg VSCODE_TSJS 1
+
+# GO
+set -x PATH $PATH ~/go/bin
+
 # Docker
 alias d='docker'
 alias dp='d ps'
