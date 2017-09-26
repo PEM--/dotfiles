@@ -30,10 +30,8 @@ alias tail='colortail -k ~/.colortail/conf.default '
 alias rm='trash'
 # Cpy: npm -g install cpy
 #alias cp='cpy'
-# Htop
-#alias top='htop'
-# VTop: npm -g install vtop
-alias top='vtop'
+# Gtop: npm -g install gtop
+alias top='gtop'
 # Mkdirp: npm -g install mkdirp
 alias mkdir='mkdirp'
 # Reset DNS cache
