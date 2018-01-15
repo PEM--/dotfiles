@@ -39,6 +39,8 @@ alias dnsreset='sudo killall -HUP mDNSResponder'
 # Atom alias
 alias editor='Atom'
 alias atom='Atom'
+# Git alias
+alias hard='git reset --hard HEAD'
 
 # Update eveything (except Mac App Store)
 function update_all

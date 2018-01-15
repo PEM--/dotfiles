@@ -102,7 +102,7 @@ if &shell =~# 'fish$'
   set shell=sh
 endif
 " See tab indendation______________________________________
-Bundle 'Yggdroot/indentLine'
+"Bundle 'Yggdroot/indentLine'
 " Comment line selected in visual mode: best combo: <Leader>c<Space>
 Bundle 'scrooloose/nerdcommenter'
 " Changes the project's working directory to the project root when opening a file
@@ -115,7 +115,7 @@ Bundle 'gmarik/vundle'
 "let g:colorv_preview_ftype='css,html,js,coffee,sass,scss,less,styl,svg'
 Bundle 'lilydjwg/colorizer'
 " HTTP server configuration________________________________
-Bundle "evanmiller/nginx-vim-syntax"
+"Bundle "evanmiller/nginx-vim-syntax"
 " YAML & Jinja2____________________________________________
 Bundle 'chase/vim-ansible-yaml'
 au BufNewFile,BufRead minion,*.sls set filetype=yaml
