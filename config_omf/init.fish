@@ -47,20 +47,15 @@ function update_all
   sudo gem update --system
   brew update
   brew upgrade
-  #brew cask update
   omf update
-  #npm -gf update
   npm -g update
-  #vundle-update
 end
 
 # Clean all caches
 function clean_all
   sudo gem clean
   brew cleanup
-  brew cask cleanup
   npm cache verify
-  yarn cache clean
 end
 
 # Remove all DS_Store
@@ -79,8 +74,6 @@ set -xg JOBS 2
 # Set Android SDK
 set -xg ANDROID_HOME $HOME/Library/Android/sdk
 set -x PATH $PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools
-#set -xg ANDROID_HOME $HOME/android-sdk
-#set -xg PATH $PATH $ANDROID_HOME $ANDROID_HOME/bin $ANDDROID_HOME/platform-tools $ANDROID_HOME/tools
 # Some environmental variables mainly for Karma (web test runner)
 set -xg FIREFOX_BIN '/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox'
 set -xg CHROME_BIN '/opt/homebrew-cask/Caskroom/google-chrome/stable-channel/Google Chrome.app/Contents/MacOS/Google Chrome'
@@ -91,6 +84,9 @@ set -xg VSCODE_TSJS 1
 
 # GO
 set -x PATH $PATH ~/go/bin
+
+# Python integratino
+eval (python3 -m virtualfish)
 
 # Docker
 alias d='docker'
@@ -119,6 +115,6 @@ function peco_select_history
   end
 end
 
-# Add yarn's bin path
-set -xg YARN_BIN (yarn global bin | grep -o '/.*')
-set -x PATH $YARN_BIN $PATH
+# Python
+eval (python3 -m virtualfish)
+
