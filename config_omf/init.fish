@@ -85,7 +85,7 @@ set -xg VSCODE_TSJS 1
 # GO
 set -x PATH $PATH ~/go/bin
 
-# Python integratino
+# Python integration
 eval (python3 -m virtualfish)
 
 # Docker
