@@ -1,0 +1,37 @@
+$PATH = ['/usr/local/bin'] + $PATH
+$PROJECT_DIRS = ['/Users/pem/Projects']
+# xontrib load autojump autoxsh bashisms coreutils distributed prompt_ret_code whole_word_jumping vox vox_tabcomplete avox
+source-bash $(/usr/libexec/path_helper -s)
+source-bash --seterrprevcmd "" /etc/profile
+$BASH_COMPLETIONS.insert(0, '/opt/local/share/bash-completion/bash_completion')
+$XONSH_COLOR_STYLE='monokai'
+$PIPENV_VENV_IN_PROJECT=1
+xontrib load vox
+vox activate python3
+$PROMPT = '{env_name:{}}{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} '
+
+# Aliases
+aliases['..']='cd ..'
+aliases['. ']='source-bash '
+aliases['rm']='trash'
+aliases['top']='gtop'
+aliases['mkdir']='mkdirp'
+aliases['tail']='colortail -k ~/.colortail/conf.default'
+
+# Update & clean up of packages
+def update_all():
+  print('Updating...')
+  sudo gem update --system
+  brew update
+  brew upgrade
+  npm -g update
+  pip list --outdated --format=freeze | grep -v r"^\-e" | cut -d = -f 1  | xargs -n1 pip install -U
+
+def clean_up():
+  print('Cleaning...')
+  sudo gem clean
+  brew cleanup
+  npm cache verify
+
+def remove_ds_store():
+  find . -name '*.DS_Store' -type f -delete
